@@ -43,9 +43,10 @@ for _ in range(30):
 
         image = vision.Image(content=data.read())
         res: vision.AnnotateImageResponse = client.face_detection(image)
-    # print(res.face_annotations[0].pan_angle)
+        print(res)
+    print(dict(res.face_annotations[0]))
     if res.face_annotations and -30 < res.face_annotations[0].pan_angle < 30:
         gotten_concentration += 1
-    sleep(1)
+    sleep(30)
 
 print((gotten_concentration*100)/expected_concentration)

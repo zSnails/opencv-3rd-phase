@@ -1,2 +1,8 @@
 key.json
+__pycache__
+tests
+*.opus
+*.wav
+emotions
+*.zeta
 pictures

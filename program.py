@@ -17,6 +17,7 @@ class Program(Tk):
         # nb.add(DiagramTab(self), text="Focus Graph")
         self.nb.pack(expand=True, fill="both")
 
+
     def cleanup(self):
         for child in self.children.values():
             if isinstance(child, Frame):

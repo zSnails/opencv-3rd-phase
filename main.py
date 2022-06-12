@@ -1,7 +1,6 @@
 from program import Program
-from os import environ
+from manager import Manager
 
-environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key.json"
 
 app = Program()
 
@@ -16,3 +15,4 @@ finally:
     # on any error that might occur, that is if the error matters to me at all lmao
     # but that's not always the case
     app.cleanup()
+    Manager().save()
