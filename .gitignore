@@ -3,6 +3,7 @@ __pycache__
 tests
 *.opus
 *.wav
+*.png
 emotions
 *.zeta
 pictures
