@@ -1,18 +1,19 @@
 from pydantic import BaseModel
 from datetime import date, time
 from typing import List
-
+from datetime import datetime
 
 # Node
 class Emotion:
     def __init__(self, name, value):
         self.name = name
         self.value = value
+        self.capture_time = datetime.now().timestamp()
         self.left = None
         self.right = None
 
     def __str__(self):
-        return f"Emotion(name={self.name!r} value={self.value!r} left={self.left!r} right={self.right!r})"
+        return f"Emotion(name={self.name!r} value={self.value!r} left={self.left!r} right={self.right!r} capture_time={self.capture_time!r})"
 
     def find(self, name: str):
         if self.name == name:
@@ -23,12 +24,12 @@ class Emotion:
             return self.right.find(name)
 
     def insert(self, new_node: "Emotion") -> None:
-        if new_node.name <= self.name:
+        if new_node.capture_time <= self.capture_time:
             if not self.left:
                 self.left = new_node
             else:
                 self.left.insert(new_node)
-        elif new_node.name > self.name:
+        elif new_node.capture_time > self.capture_time:
             if not self.right:
                 self.right = new_node
             else:
@@ -49,6 +50,7 @@ class Activity:
         self.date: date = date
         self.start: time = start
         self.end: time = end
+        self.done = False
         self.emotions: Emotion = None
 
 

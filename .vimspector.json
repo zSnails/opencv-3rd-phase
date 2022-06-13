@@ -8,7 +8,8 @@
                 "type": "python",
                 "cwd": "${workspaceRoot}",
                 "stopOnEntry": true,
-                "program": "${file}"
+                "program": "${file}",
+                "justMyCode": false
             },
             "breakpoints": {
                 "exception": {
