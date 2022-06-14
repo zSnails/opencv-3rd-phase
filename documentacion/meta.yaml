@@ -1,0 +1,11 @@
+title: Proyecto de Taller de Programación
+author: Aaron González, Johan Jiménez
+documentclass: apa7tec
+classoptions:
+  - stu
+  - helv
+header-includes: |
+  \shorttitle{Taller de Programación}
+  \duedate{2022}
+  \mes{Junio}
+  \venue{San Carlos}
