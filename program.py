@@ -2,6 +2,7 @@ from tkinter import Tk
 from tkinter.ttk import Notebook, Frame
 from focus_tab import FocusTab
 from reports_tab import ReportsTab
+from graph_tab import GraphTab
 
 class Program(Tk):
     def __init__(self):
@@ -15,6 +16,7 @@ class Program(Tk):
         self.nb = Notebook(self)
         self.nb.add(FocusTab(self), text="Focus")
         self.nb.add(ReportsTab(self), text="Reports")
+        self.nb.add(GraphTab(self), text="Graph")
         # TODO: add this
         # nb.add(DiagramTab(self), text="Focus Graph")
         self.nb.pack(expand=True, fill="both")

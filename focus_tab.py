@@ -29,6 +29,7 @@ class FocusTab(Frame):
         self.system_clock = datetime(2022, 6, 12, 20)
 
         def f():
+            self.log("DEBUG", "Updating system clock")
             self.system_clock = datetime(2022, 6, 12, 21)
 
         self.after(60000, f)
@@ -43,8 +44,8 @@ class FocusTab(Frame):
 
         self.current_activity = None
 
-        self.concentration_running = True
-        self.emotions_running = True
+        self.concentration_running = False
+        self.emotions_running = False
         self.alive = True
 
         self.activities_worker()
@@ -54,13 +55,13 @@ class FocusTab(Frame):
     def init_ui(self):
         self.pack(fill="both", expand=True)
 
-        self.focus_label = StringVar(self, value="On")
+        self.focus_label = StringVar(self, value="Off")
         Label(self, text="Focus tracking").grid(column=1, row=1)
         Button(self, command=self.toggle_status, textvariable=self.focus_label).grid(
             column=2, row=1
         )
 
-        self.emotions_label = StringVar(self, value="On")
+        self.emotions_label = StringVar(self, value="Off")
         Label(self, text="Emotions tracking").grid(column=1, row=2)
         Button(
             self, command=self.toggle_emotions, textvariable=self.emotions_label
@@ -100,7 +101,6 @@ class FocusTab(Frame):
         self.concentration_running = False
         self.emotions_running = False
         self.alive = False
-        self.camera.release()
 
     def activities_worker(self):
         top: Activity = self.activities.peek()
@@ -142,8 +142,10 @@ class FocusTab(Frame):
             else:
                 self.log("DEBUG", "Normalizing emotions data")
                 data = normalize_data(data.face_annotations[0])
+                self.log("DEBUG", data)
                 for emotion in emotion_types:
-                    da = (emotion, data[f"{emotion}_likelihood"])
+                    val = data[f"{emotion}_likelihood"]
+                    da = (emotion, val if val > 1 else 0)
                     if not self.current_activity.emotions:
                         self.current_activity.emotions = Emotion(*da)
                         continue

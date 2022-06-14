@@ -1,8 +1,5 @@
 from tkinter import StringVar, Text
 from tkinter.ttk import Frame, Label, OptionMenu
-from pandas import DataFrame
-from matplotlib.pyplot import Figure  # TODO: change this
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from manager import Manager
 from datetime import date, timedelta
 from operator import itemgetter
@@ -80,7 +77,7 @@ class ReportsTab(Frame):
         self.stats.delete(1.0, "end")
         self.stats.insert(
             "end",
-            f"DM: {max(b_dataset.items(), key=itemgetter(1)) if b_dataset else 'no data'}\nDM: {max(e_dataset.items(), key=itemgetter(1)) if e_dataset else 'no data'}",
+            f"Dominant mood (morning): {max(b_dataset.items(), key=itemgetter(1))[0] if b_dataset else 'no data'}\nDominant Mood (evening): {max(e_dataset.items(), key=itemgetter(1))[0] if e_dataset else 'no data'}",
         )
         self.stats.configure(state="disabled")
 
